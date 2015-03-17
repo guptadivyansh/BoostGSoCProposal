@@ -1,5 +1,7 @@
 // Author: Divyansh Gupta
 
+// Note: Deallocation and destructors should not throw
+
 #ifndef LIMITED_VECTOR_H
 #define LIMITED_VECTOR_H
 
@@ -189,8 +191,6 @@ public:
         // _other's dtor will destroy the elements that *this previously had
         return *this;
     }
-
-    //limited_vector(std::initializer_list<T> _il
 
     // No range checking
     reference operator[](size_type _n) noexcept

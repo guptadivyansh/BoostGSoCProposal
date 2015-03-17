@@ -17,11 +17,11 @@
 
 **Please summarize your educational background (degrees earned, courses taken, etc.).**
 
-I'm currently a second year student (out of 5) of a Btech + Mtech program in Computer Science and Engineering.
+I'm currently a second year student (out of 5) of a B.Tech + M.Tech program in Computer Science and Engineering.
 A few completed courses relevant to this project are: 
   
 * **Software Engineering (+Lab)** - A two part course where the first part covered all the basic features of C++98 and the second part covered software development procedures like UML designing, testing, documenting, etc. The lab involved creating fraction, polynomial and (a very trivial) deque libraries in C++ apart from a few GUI-based softwares in Java.
-  * **Algorithms (+Lab)** - Covered complexity analysis and design of basic algorithms and data structures like binary search trees, RB trees, heaps, hash tables etc.
+* **Algorithms (+Lab)** - Covered complexity analysis and design of basic algorithms and data structures like binary search trees, RB trees, heaps, hash tables etc.
 
 **Please summarize your programming background (OSS projects, internships, jobs, etc.).**
 
@@ -29,7 +29,7 @@ I'm mainly interested in the field of robotics and AI. I'm a part of the Swarm R
 
 **Please tell us a little about your programming interests. Please tell us why you are interested in contributing to the Boost C++ Libraries.**
 
-I've been using several OSS projects in my daily life for several years, and my motivation to contibute to them some day was one of the reasons I joined a Computer Science program in college. I believe that I have acquired sufficient proficiency in the last two years that I can start giving back to the OSS community, and since C++ is my forte, Boost C++ Library would be the best place for me to step into the world of OSS.
+I've been using several OSS projects in my daily life for several years, and my motivation to contribute to them some day was one of the reasons I joined a Computer Science program in college. I believe that I have acquired sufficient proficiency in the last two years that I can start giving back to the OSS community, and since C++ is my forte, Boost C++ Library would be the best place for me to step into the world of OSS.
 
 **What is your interest in the project you are proposing?**
 
@@ -81,7 +81,7 @@ Since we're rethinking such a basic STL container like vector, community feedbac
 
 ####Drawbacks
 
-The main drawback of `devector`, as with normal `vector`'s, is that all references will be potentially invalidated on operations like `push_back`, `push_front`, `insert`, `emplace`, etc. Also, if the growth factor is too large, then a lot of memory will be wasted, especially since it allocates extra free space on both sides compared to a normal `vector`.
+The main drawback of `devector`, as with normal `vector`'s, is that all references are potentially invalidated on operations like `push_back`, `push_front`, `insert`, `emplace`, etc. Also, if the growth factor is too large, then a lot of memory will be wasted, especially since it allocates extra free space on both sides compared to a normal `vector`.
 
 ###Deque
 
@@ -89,9 +89,11 @@ In certain applications, reference stability is a much more important criteria t
 
 * Ability to set the size of the segments in the constructors
 * `reserve_front` and `reserve_back` functions that allow the user to reserve space before pushing elements to the front or back.
-* After consulting the mentor, it was decided that it would be more useful to have fast iteration via a member function called `for_each` or `apply_for_each`, rather than a new category of segmented iterator.
+* Fast iteration via a member function called `for_each` or `apply_for_each`
 
-Since `boost::container::deque' is meant to mirror the standard container, rather than making changes to it, I intend on reusing as much of that code as possible and creating a new `flexible_deque` container which incorporates the above features while preserving the current functionality. This will require a very thorough study of the `boost::container::deque` code.
+After consulting the mentor, it was decided that it would be more useful to have the above function, rather than a new category of segmented iterator. 
+
+Since `boost::container::deque` is meant to mirror the standard container, rather than making changes to it, I intend on reusing as much of that code as possible and creating a new `flexible_deque` container which incorporates the above features while preserving the current functionality. This will require a very thorough study of the `boost::container::deque` code.
 
 
 ##Proposed Milestones and Schedule
@@ -107,7 +109,7 @@ As mentioned above, I'd prefer to start early and finish up early to avoid clash
 
 **_June 27th - July 4th Mid-term evaluation deliverables_:** completed `devector` along with tests and benchmarking report.
   
-* **July 3rd**: Study [`boost::container::deque`][boost-deque] and implementations of `std::deque`. Another 3rd party deque implementation I have looked at can be found [here][3rd-deque]. Determine how much code can be reused from `boost::container::deque`.
+  * **July 3rd**: Study [`boost::container::deque`][boost-deque] and implementations of `std::deque`. Another 3rd party deque implementation I have looked at can be found [here][3rd-deque]. Determine how much code can be reused from `boost::container::deque`.
   * **July 17th**: Incorporate the new features without breaking deque::container::deque.
   * **July 31st**: Run all the earlier [tests][deque-tests] of `boost::container::deque` to ensure nothing broke and write tests for the new features. Also, benchmark the performance of the new container against `std::deque`.
   * **August 7th**: Request for community feedback and incorporate suggestions. Buffer time for any unforeseen delays.
@@ -120,9 +122,9 @@ My solution to the programming competency test is available [here][competency-te
 [vector-analysis]: http://stackoverflow.com/questions/6550509/amortized-analysis-of-stdvector-insertion
 [3rd-vector]: https://github.com/orlp/devector
 [3rd-deque]: http://lists.boost.org/Archives/boost/2009/11/159373.php
-[boost-vector]: http://www.boost.org/doc/libs/1_57_0/boost/container/deque.hpp
-[boost-deque]: http://www.boost.org/doc/libs/1_57_0/boost/container/vector.hpp
+[boost-vector]: http://www.boost.org/doc/libs/1_57_0/boost/container/vector.hpp
+[boost-deque]: http://www.boost.org/doc/libs/1_57_0/boost/container/deque.hpp
 [benchmark]: http://www.codeproject.com/Articles/5425/An-In-Depth-Study-of-the-STL-Deque-Container
 [deque-tests]: https://github.com/boostorg/container/blob/master/test/deque_test.cpp
-[competency-test]: http://www.google.com
+[competency-test]: https://github.com/guptadivyansh/BoostGSoCProposal
 

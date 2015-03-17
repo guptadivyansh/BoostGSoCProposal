@@ -204,7 +204,7 @@ public:
             && std::equal(begin(), end(), _other.begin()));
     }
 
-    bool operator!=(const limited_vector& _other) noexcept{
+    bool operator!=(const limited_vector& _other) {
         return !(*this == _other);
     }
 
@@ -277,11 +277,13 @@ public:
         while(!empty()) pop_back();
     }
 
-    // set_capacity can be used to explicitly set the capacity 
-    // of the container. If the current size is greater than the 
-    // requested capacity, then the remaining elements are destroyed
+    // reserve can be used to explicitly set the capacity 
+    // of the container.
     // Strong exception guarantee
-    void set_capacity(size_type _cap) {
+    void reserve(size_type _cap) {
+
+        if (capacity() >= _cap)
+            return;
 
         vector_base<T, Allocator> temp(_cap, alloc_);
 
@@ -298,8 +300,19 @@ public:
         swap_base(temp);
     }
 
+    // Strong exception guarantee
     void shrink_to_fit() {
-        set_capacity(size());
+
+        if(size() == capacity())
+            return;
+
+        vector_base<T, Allocator> temp(size(), alloc_);
+
+        alloc_uninitialized_copy(begin(), end(), temp.start_);
+        temp.finish_ = temp.start_ + size();        
+
+        clear();
+        swap_base(temp);
     }
 
 private:
@@ -322,6 +335,7 @@ private:
         }
     }
 
+    // Rationale: same as above
     template<class InputIterator>
     void alloc_uninitialized_copy(InputIterator _begin, InputIterator _end, 
         iterator _storage) {

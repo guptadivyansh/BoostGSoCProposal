@@ -91,14 +91,14 @@ void test()
     assert(vec_b.size() == vec.size());
     assert(vec_b.capacity() == vec.capacity());
 
-    ////////////////////////////
-    // Testing set_capacity() //
-    ////////////////////////////
+    ///////////////////////
+    // Testing reserve() //
+    ///////////////////////
     tester::set_limit(11);
     tester* initial_begin = vec.begin();
     tester* initial_end = vec.end();
     try {
-        vec.set_capacity(5); 
+        vec.reserve(5); 
         // will fail because it copy constructs new contents before destroying old ones
     }
     catch(std::out_of_range e) {
@@ -110,7 +110,7 @@ void test()
 
 
     tester::set_limit(13); // 4 * 3 + 1
-    vec.set_capacity(5);
+    vec.reserve(5);
     assert(tester::livecount == 9);
     assert(vec.size() == 4);
     assert(vec.capacity() == 5);
